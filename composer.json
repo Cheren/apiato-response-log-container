@@ -1,0 +1,13 @@
+{
+    "name": "cheren/apiato-response-log-container",
+    "description": "This is Apiato response log container",
+    "type": "apiato-container",
+    "license": "MIT",
+    "extra": {
+        "apiato": {
+            "container": {
+                "name": "ResponseLog"
+            }
+        }
+    }
+}
