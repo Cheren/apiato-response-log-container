@@ -44,6 +44,6 @@ final class ResponseLogPermissions extends Permission
 
     public function getContainer(): string
     {
-        return 'settings';
+        return 'responseLog';
     }
 }
