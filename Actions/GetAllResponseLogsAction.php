@@ -17,12 +17,21 @@ namespace App\Containers\Vendor\ResponseLog\Actions;
 
 use App\Containers\Vendor\ResponseLog\Tasks\GetAllResponseLogsTask;
 use App\Ship\Parents\Actions\Action;
+use Apiato\Core\Exceptions\CoreInternalErrorException;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Prettus\Repository\Exceptions\RepositoryException;
 
 final class GetAllResponseLogsAction extends Action
 {
+    /**
+     * @return LengthAwarePaginator
+     * @throws CoreInternalErrorException
+     * @throws RepositoryException
+     */
     public function run(): LengthAwarePaginator
     {
-        return app(GetAllResponseLogsTask::class)->run();
+        return app(GetAllResponseLogsTask::class)
+            ->addRequestCriteria()
+            ->run();
     }
 }
