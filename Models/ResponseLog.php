@@ -27,7 +27,7 @@ use JBZoo\Data\JSON;
  * @property-read string $exception
  * @property-read string $message
  * @property-read JSON $errors
- * @property-read null|string $files
+ * @property-read null|string $file
  * @property-read null|string $line
  * @property-read JSON $trace
  * @property-read JSON $request
