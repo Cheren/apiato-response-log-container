@@ -48,7 +48,7 @@ class CreateResponseLogDto extends Dto
         /** @var Throwable $exception */
         $exception = $args[0]['exception'];
 
-        $args[0]['code'] = $exception->getCode();
+        $args[0]['code'] = (int)$exception->getCode();
 
         if ($args[0]['code'] === 0 && property_exists($exception, 'status')) {
             $args[0]['code'] = $exception->status;
