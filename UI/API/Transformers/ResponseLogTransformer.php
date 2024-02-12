@@ -29,7 +29,7 @@ final class ResponseLogTransformer extends Transformer
             'exception' => $responseLog->exception,
             'message' => $responseLog->message,
             'errors' => $responseLog->errors,
-            'files' => $responseLog->files,
+            'file' => $responseLog->file,
             'line' => $responseLog->line,
             'trace' => $responseLog->trace,
             'request' => $responseLog->request,
