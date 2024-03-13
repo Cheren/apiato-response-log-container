@@ -67,7 +67,7 @@ class CreateResponseLogDto extends Dto
 
         $args[0]['file'] = $exception->getFile();
         $args[0]['line'] = $exception->getLine();
-        $args[0]['trace'] = array_slice($exception->getTrace(),0, 15);
+        $args[0]['trace'] = array_slice($exception->getTrace(), 0, 10);
     }
 
     protected function requestToArrayData(&$args)
