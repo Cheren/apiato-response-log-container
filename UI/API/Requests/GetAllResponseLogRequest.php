@@ -14,7 +14,7 @@
 
 namespace App\Containers\Vendor\ResponseLog\UI\API\Requests;
 
-use App\Containers\Vendor\ResponseLog\Access\ResponseLogPermissions;
+use App\Containers\Vendor\ResponseLog\Permissions\Permissions;
 use App\Containers\Vendor\ResponseLog\UI\API\Transformers\ResponseLogTransformer;
 use App\Ship\Contracts\GettableTransformer;
 use App\Ship\Parents\Transformers\Transformer;
@@ -23,7 +23,7 @@ use App\Ship\Requests\ApiRequest;
 class GetAllResponseLogRequest extends ApiRequest implements GettableTransformer
 {
     protected array $access = [
-        'permissions' => ResponseLogPermissions::READ
+        'permissions' => Permissions::READ
     ];
 
     public function getTransformer(): Transformer

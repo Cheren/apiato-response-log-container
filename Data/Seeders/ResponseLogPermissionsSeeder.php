@@ -14,10 +14,10 @@
 
 namespace App\Containers\Vendor\ResponseLog\Data\Seeders;
 
-use App\Containers\Vendor\ResponseLog\Access\ResponseLogPermissions;
+use App\Containers\Vendor\ResponseLog\Permissions\Permissions;
 use App\Ship\Seeders\PermissionsSeeder;
 
 final class ResponseLogPermissionsSeeder extends PermissionsSeeder
 {
-    protected ?string $permissionClass = ResponseLogPermissions::class;
+    protected ?string $permissionClass = Permissions::class;
 }

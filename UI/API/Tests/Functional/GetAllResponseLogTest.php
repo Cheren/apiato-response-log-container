@@ -14,7 +14,7 @@
 
 namespace App\Containers\Vendor\ResponseLog\UI\API\Tests\Functional;
 
-use App\Containers\Vendor\ResponseLog\Access\ResponseLogPermissions;
+use App\Containers\Vendor\ResponseLog\Permissions\Permissions;
 use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
 use App\Containers\Vendor\ResponseLog\Tests\ApiTestCase;
 use Illuminate\Http\Response;
@@ -22,7 +22,7 @@ use Illuminate\Http\Response;
 final class GetAllResponseLogTest extends ApiTestCase
 {
     protected array $access = [
-        'permissions' => ResponseLogPermissions::READ
+        'permissions' => Permissions::READ
     ];
 
     protected string $endpoint = 'get@v1/response-logs';

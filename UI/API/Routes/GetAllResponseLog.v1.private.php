@@ -56,9 +56,10 @@
 }
  */
 
+use App\Containers\Vendor\ResponseLog\Facades\Container;
 use App\Containers\Vendor\ResponseLog\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('response-logs', [Controller::class, 'getAllResponseLogs'])
+Route::get(Container::getApiUri(), [Controller::class, 'getAllResponseLogs'])
     ->name('api_vendor_response_logs_get_all_response_logs')
     ->middleware(['auth:api']);

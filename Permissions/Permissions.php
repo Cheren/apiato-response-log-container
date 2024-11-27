@@ -12,13 +12,13 @@
  * @link       https://zemlechist.ru
  */
 
-namespace App\Containers\Vendor\ResponseLog\Access;
+namespace App\Containers\Vendor\ResponseLog\Permissions;
 
 use App\Ship\Access\Permission;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-final class ResponseLogPermissions extends Permission
+final class Permissions extends Permission
 {
     public const READ = 'vendor-response-log-read';
 
@@ -28,7 +28,6 @@ final class ResponseLogPermissions extends Permission
      */
     public function getList(): Collection
     {
-
         return collect([
             $this->createPermissionDto(self::READ, [
                 'display_name' => $this->getTranslateKey('read.name'),
