@@ -14,6 +14,7 @@
 
 namespace App\Containers\Vendor\ResponseLog\Permissions;
 
+use App\Containers\Vendor\ResponseLog\Facades\Container;
 use App\Ship\Access\Permission;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -38,11 +39,16 @@ final class Permissions extends Permission
 
     public function getSection(): string
     {
-        return 'vendor';
+        return Container::getSectionName();
     }
 
     public function getContainer(): string
     {
-        return 'responseLog';
+        return Container::getName();
+    }
+
+    public function getSchemaAccessor(): ?string
+    {
+        return PermissionsSchema::class;
     }
 }
