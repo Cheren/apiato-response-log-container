@@ -16,16 +16,17 @@
 namespace App\Containers\Vendor\ResponseLog\Permissions;
 
 use App\Containers\AppSection\Authorization\Permission\Schema\PermissionsCollection;
-use App\Ship\Access\PermissionsSchema as ShipPermissionsSchema;
+use App\Containers\Vendor\ResponseLog\Permissions\Schemas\ReadSchema;
+use App\Ship\Access\PermissionsSchema;
 
-final class PermissionsSchema extends ShipPermissionsSchema
+final class Schema extends PermissionsSchema
 {
     /**
      * @return PermissionsCollection
      */
     public function schema(): PermissionsCollection
     {
-        $this->addSimplePermissionSchema(Permissions::READ);
-        return $this->permissionsSchema;
+        return $this->schema
+            ->add((new ReadSchema($this))->getSchema());
     }
 }
