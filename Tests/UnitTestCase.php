@@ -14,8 +14,6 @@
 
 namespace App\Containers\Vendor\ResponseLog\Tests;
 
-use App\Ship\Parents\Tests\PhpUnit\TestCase as ShipTestCase;
-
-abstract class TestCase extends ShipTestCase
+abstract class UnitTestCase extends ContainerTestCase
 {
 }

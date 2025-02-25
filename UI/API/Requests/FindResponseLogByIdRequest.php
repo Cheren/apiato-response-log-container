@@ -15,26 +15,26 @@
 namespace App\Containers\Vendor\ResponseLog\UI\API\Requests;
 
 use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
+use App\Ship\Traits\Request\HasInputId;
 
-/**
- * @property-read mixed $id
- */
 class FindResponseLogByIdRequest extends GetAllResponseLogRequest
 {
+    use HasInputId;
+
     protected array $decode = [
-        'id'
+        ID
     ];
 
     protected array $urlParameters = [
-        'id'
+        ID
     ];
 
     public function rules(): array
     {
         return [
-            'id' => [
+            ID => [
                 'required',
-                'exists:' . ResponseLog::TABLE . ',id'
+                'exists:' . ResponseLog::TABLE . ',' . ID
             ]
         ];
     }

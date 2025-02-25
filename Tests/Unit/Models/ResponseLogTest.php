@@ -15,26 +15,27 @@
 
 namespace App\Containers\Vendor\ResponseLog\Tests\Unit\Models;
 
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
-use App\Containers\Vendor\ResponseLog\Tests\TestCase;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
+use App\Containers\Vendor\ResponseLog\Tests\UnitTestCase;
 use JBZoo\Data\JSON;
 
-final class ResponseLogTest extends TestCase
+final class ResponseLogTest extends UnitTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->model = ResponseLog::factory()->create();
+        $this->model = ResponseLogModel::factory()->create();
     }
 
     public function testModelInstance(): void
     {
-        $this->assertInstanceOf(ResponseLog::class, $this->model);
+        $this->assertInstanceOf(ResponseLogModel::class, $this->model);
     }
 
     public function testModelTableName(): void
     {
-        $this->assertSame(ResponseLog::TABLE, $this->model->getTable());
+        $this->assertSame(ResponseLogModel::TABLE, $this->model->getTable());
     }
 
     public function testTimestamp(): void
@@ -44,21 +45,21 @@ final class ResponseLogTest extends TestCase
 
     public function testGetResourceKey(): void
     {
-        $this->assertSame(ResponseLog::RESOURCE_KEY, $this->model->getResourceKey());
+        $this->assertSame(ResponseLogModel::RESOURCE_KEY, $this->model->getResourceKey());
     }
 
     public function testFillable(): void
     {
         $fields = [
-            'ip_address',
-            'code',
-            'exception',
-            'message',
-            'errors',
-            'file',
-            'line',
-            'trace',
-            'request'
+            ResponseLog::IP_ADDRESS,
+            ResponseLog::CODE,
+            ResponseLog::EXCEPTION,
+            ResponseLog::MESSAGE,
+            ResponseLog::ERRORS,
+            ResponseLog::FILE,
+            ResponseLog::LINE,
+            ResponseLog::TRACE,
+            ResponseLog::REQUEST
         ];
 
         foreach ($fields as $field) {

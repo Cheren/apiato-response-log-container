@@ -16,17 +16,17 @@
 namespace App\Containers\Vendor\ResponseLog\Tests\Unit\Actions;
 
 use App\Containers\Vendor\ResponseLog\Actions\GetAllResponseLogsAction;
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
-use App\Containers\Vendor\ResponseLog\Tests\TestCase;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
+use App\Containers\Vendor\ResponseLog\Tests\UnitTestCase;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-final class GetAllResponseLogsActionTest extends TestCase
+final class GetAllResponseLogsActionTest extends UnitTestCase
 {
     public function test(): void
     {
         $total = 12;
 
-        ResponseLog::factory()->count($total)->create();
+        ResponseLogModel::factory()->count($total)->create();
 
         $result = app(GetAllResponseLogsAction::class)->run();
         $this->assertInstanceOf(LengthAwarePaginator::class, $result);

@@ -13,13 +13,8 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\ResponseLog\ResponseLog;
+namespace App\Containers\Vendor\ResponseLog\Tests;
 
-if (!function_exists('response_log')) {
-
-    function response_log(): ResponseLog
-    {
-        return new ResponseLog();
-    }
-
+abstract class FunctionalTestCase extends UnitTestCase
+{
 }

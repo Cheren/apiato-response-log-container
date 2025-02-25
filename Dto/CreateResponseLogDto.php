@@ -14,12 +14,17 @@
 
 namespace App\Containers\Vendor\ResponseLog\Dto;
 
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Ship\Contracts\ToData;
 use App\Ship\Parents\Dto\Dto;
+use App\Ship\Traits\DtoToData;
 use Illuminate\Http\Request;
 use Throwable;
 
-class CreateResponseLogDto extends Dto
+class CreateResponseLogDto extends Dto implements ToData
 {
+    use DtoToData;
+
     public string $ip_address;
     public int $code;
     public string $exception;
@@ -46,37 +51,37 @@ class CreateResponseLogDto extends Dto
     protected function setAttrsByException(&$args)
     {
         /** @var Throwable $exception */
-        $exception = $args[0]['exception'];
+        $exception = $args[ZERO][ResponseLog::EXCEPTION];
 
-        $args[0]['code'] = (int)$exception->getCode();
+        $args[ZERO][ResponseLog::CODE] = (int)$exception->getCode();
 
-        if ($args[0]['code'] === 0 && property_exists($exception, 'status')) {
-            $args[0]['code'] = $exception->status;
+        if ($args[ZERO][ResponseLog::CODE] === ZERO && property_exists($exception, 'status')) {
+            $args[ZERO][ResponseLog::CODE] = $exception->status;
         }
 
-        $args[0]['exception'] = $exception::class;
-        $args[0]['message'] = $exception->getMessage();
+        $args[ZERO][ResponseLog::EXCEPTION] = $exception::class;
+        $args[ZERO][ResponseLog::MESSAGE] = $exception->getMessage();
 
         if (method_exists($exception, 'getErrors')) {
-            $args[0]['errors'] = $exception->getErrors();
+            $args[ZERO]['errors'] = $exception->getErrors();
         }
 
         if (method_exists($exception, 'errors')) {
-            $args[0]['errors'] = $exception->errors();
+            $args[ZERO]['errors'] = $exception->errors();
         }
 
-        $args[0]['file'] = $exception->getFile();
-        $args[0]['line'] = $exception->getLine();
-        $args[0]['trace'] = array_slice($exception->getTrace(), 0, 10);
+        $args[ZERO][ResponseLog::FILE] = $exception->getFile();
+        $args[ZERO][ResponseLog::LINE] = $exception->getLine();
+        $args[ZERO][ResponseLog::TRACE] = array_slice($exception->getTrace(), ZERO, 10);
     }
 
     protected function requestToArrayData(&$args)
     {
         /** @var Request $request */
-        $request = $args[0]['request'];
+        $request = $args[ZERO]['request'];
 
-        $args[0]['ip_address'] = $request->ip();
-        $args[0]['request'] = [
+        $args[ZERO][ResponseLog::IP_ADDRESS] = $request->ip();
+        $args[ZERO][ResponseLog::REQUEST] = [
             'method' => $request->getMethod(),
             'attributes' => $request->attributes->all(),
             'request' => $request->request->all(),
@@ -90,11 +95,11 @@ class CreateResponseLogDto extends Dto
 
     protected function isRequestAttr($args): bool
     {
-        return isset($args[0]['request']) && $args[0]['request'] instanceof Request;
+        return isset($args[ZERO][ResponseLog::REQUEST]) && $args[ZERO][ResponseLog::REQUEST] instanceof Request;
     }
 
     protected function isExceptionAttr($args): bool
     {
-        return isset($args[0]['exception']) && $args[0]['exception'] instanceof Throwable;
+        return isset($args[ZERO][ResponseLog::EXCEPTION]) && $args[ZERO][ResponseLog::EXCEPTION] instanceof Throwable;
     }
 }

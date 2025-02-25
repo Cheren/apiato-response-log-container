@@ -16,8 +16,8 @@ namespace App\Containers\Vendor\ResponseLog\Actions;
 
 use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
 use App\Containers\Vendor\ResponseLog\Tasks\FindResponseLogByIdTask;
-use App\Ship\Parents\Actions\Action;
 use App\Ship\Exceptions\NotFoundException;
+use App\Ship\Parents\Actions\Action;
 
 class FindResponseLogByIdAction extends Action
 {

@@ -13,13 +13,17 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\ResponseLog\ResponseLog;
+namespace App\Containers\Vendor\ResponseLog\UI\API\Transformers;
 
-if (!function_exists('response_log')) {
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
 
-    function response_log(): ResponseLog
+final class AdminResponseLogTransformer extends ResponseLogTransformer
+{
+    public function transform(ResponseLogModel $responseLog): array
     {
-        return new ResponseLog();
+        return parent::transform($responseLog) +
+            [
+                $this->realKey(ID) => $responseLog->id
+            ];
     }
-
 }

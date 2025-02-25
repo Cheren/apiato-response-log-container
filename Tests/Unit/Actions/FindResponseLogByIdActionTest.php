@@ -15,11 +15,11 @@
 namespace App\Containers\Vendor\ResponseLog\Tests\Unit\Actions;
 
 use App\Containers\Vendor\ResponseLog\Actions\FindResponseLogByIdAction;
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
-use App\Containers\Vendor\ResponseLog\Tests\TestCase;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
+use App\Containers\Vendor\ResponseLog\Tests\UnitTestCase;
 use App\Ship\Exceptions\NotFoundException;
 
-class FindResponseLogByIdActionTest extends TestCase
+final class FindResponseLogByIdActionTest extends UnitTestCase
 {
     public function testWithInvalidId(): void
     {
@@ -29,9 +29,9 @@ class FindResponseLogByIdActionTest extends TestCase
 
     public function testWithActualId(): void
     {
-        $log = ResponseLog::factory()->create();
+        $log = ResponseLogModel::factory()->create();
         $this->assertInstanceOf(
-            ResponseLog::class,
+            ResponseLogModel::class,
             app(FindResponseLogByIdAction::class)->run($log->id)
         );
     }

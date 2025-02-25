@@ -14,31 +14,32 @@
 
 namespace App\Containers\Vendor\ResponseLog\Data\Factories;
 
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
 use App\Ship\Parents\Factories\Factory;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method Collection|ResponseLog create($attributes = [], ?Model $parent = null)
+ * @method Collection|ResponseLogModel create($attributes = [], ?Model $parent = null)
  */
 final class ResponseLogFactory extends Factory
 {
-    protected $model = ResponseLog::class;
+    protected $model = ResponseLogModel::class;
 
     public function definition(): array
     {
         return [
-            'ip_address' => $this->faker->ipv4,
-            'code' => 200,
-            'exception' => Exception::class,
-            'message' => $this->faker->text,
-            'errors' => [],
-            'file' => null,
-            'line' => null,
-            'trace' => [],
-            'request' => [],
+            ResponseLog::IP_ADDRESS => $this->faker->ipv4,
+            ResponseLog::CODE => 200,
+            ResponseLog::EXCEPTION => Exception::class,
+            ResponseLog::MESSAGE => $this->faker->text,
+            ResponseLog::ERRORS => [],
+            ResponseLog::FILE => null,
+            ResponseLog::LINE => null,
+            ResponseLog::TRACE => [],
+            ResponseLog::REQUEST => [],
         ];
     }
 }

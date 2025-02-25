@@ -14,29 +14,31 @@
 
 namespace App\Containers\Vendor\ResponseLog\Models;
 
+use Apiato\Core\Contracts\HasResourceKey;
 use App\Containers\Vendor\ResponseLog\Data\Factories\ResponseLogFactory;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog as BaseResponseLog;
 use App\Ship\Database\Casts\JSON as JsonCast;
 use App\Ship\Parents\Models\Model;
 use Illuminate\Support\Carbon;
 use JBZoo\Data\JSON;
 
 /**
- * @property-read int $id
- * @property-read string $ip_address
- * @property-read int $code
- * @property-read string $exception
- * @property-read string $message
- * @property-read JSON $errors
- * @property-read null|string $file
- * @property-read null|string $line
- * @property-read JSON $trace
- * @property-read JSON $request
- * @property-read null|Carbon $created_at
- * @property-read null|Carbon $updated_at
+ * @property-read int $id Уникальны идентификатор.
+ * @property-read string $ip_address IP адрес.
+ * @property-read int $code Код ошибки.
+ * @property-read string $exception Название исключения.
+ * @property-read string $message Сообщение об ошибке.
+ * @property-read JSON $errors Список ошибок (В основном при валидации).
+ * @property-read null|string $file Файл где произошла ошибка.
+ * @property-read null|string $line Строка где произошла ошибка.
+ * @property-read JSON $trace Отслеждивание ошибки.
+ * @property-read JSON $request Данные запроса.
+ * @property-read null|Carbon $created_at Дата и время моздания.
+ * @property-read null|Carbon $updated_at Дата и время обновления.
  *
  * @method static ResponseLogFactory factory(...$parameters)
  */
-final class ResponseLog extends Model
+final class ResponseLog extends Model implements HasResourceKey
 {
     public const TABLE = 'response_logs';
     public const RESOURCE_KEY = 'ResponseLog';
@@ -45,20 +47,20 @@ final class ResponseLog extends Model
     protected string $resourceKey = self::RESOURCE_KEY;
 
     protected $fillable = [
-        'ip_address',
-        'code',
-        'exception',
-        'message',
-        'errors',
-        'file',
-        'line',
-        'trace',
-        'request'
+        BaseResponseLog::IP_ADDRESS,
+        BaseResponseLog::CODE,
+        BaseResponseLog::EXCEPTION,
+        BaseResponseLog::MESSAGE,
+        BaseResponseLog::ERRORS,
+        BaseResponseLog::FILE,
+        BaseResponseLog::LINE,
+        BaseResponseLog::TRACE,
+        BaseResponseLog::REQUEST
     ];
 
     protected $casts = [
-        'errors' => JsonCast::class,
-        'trace' => JsonCast::class,
-        'request' => JsonCast::class
+        BaseResponseLog::ERRORS => JsonCast::class,
+        BaseResponseLog::TRACE => JsonCast::class,
+        BaseResponseLog::REQUEST => JsonCast::class
     ];
 }

@@ -17,25 +17,26 @@ namespace App\Containers\Vendor\ResponseLog\Tests\Unit\Actions;
 
 use App\Containers\Vendor\ResponseLog\Actions\CreateResponseLogAction;
 use App\Containers\Vendor\ResponseLog\Dto\CreateResponseLogDto;
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
-use App\Containers\Vendor\ResponseLog\Tests\TestCase;
-use Illuminate\Support\Facades\Request;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
+use App\Containers\Vendor\ResponseLog\Tests\UnitTestCase;
 use Exception;
+use Illuminate\Support\Facades\Request;
 
-final class CreateResponseLogActionTest extends TestCase
+final class CreateResponseLogActionTest extends UnitTestCase
 {
     public function test(): void
     {
         $dto = new CreateResponseLogDto([
-            'ip_address' => Request::ip(),
-            'code' => 404,
-            'exception' => Exception::class,
-            'message' => 'Message',
-            'request' => app('request')
+            ResponseLog::IP_ADDRESS => Request::ip(),
+            ResponseLog::CODE => 404,
+            ResponseLog::EXCEPTION => Exception::class,
+            ResponseLog::MESSAGE => 'Message',
+            ResponseLog::REQUEST => app('request')
         ]);
 
         $result = app(CreateResponseLogAction::class)->run($dto);
 
-        $this->assertInstanceOf(ResponseLog::class, $result);
+        $this->assertInstanceOf(ResponseLogModel::class, $result);
     }
 }

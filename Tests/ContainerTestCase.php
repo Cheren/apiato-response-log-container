@@ -13,13 +13,10 @@
  * @author      Sergey Kalistratov <sergey@kalistratov.ru>
  */
 
-use App\Containers\Vendor\ResponseLog\ResponseLog;
+namespace App\Containers\Vendor\ResponseLog\Tests;
 
-if (!function_exists('response_log')) {
+use App\Ship\Parents\Tests\TestCase as ShipTestCase;
 
-    function response_log(): ResponseLog
-    {
-        return new ResponseLog();
-    }
-
+abstract class ContainerTestCase extends ShipTestCase
+{
 }

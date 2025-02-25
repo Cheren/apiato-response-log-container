@@ -14,8 +14,13 @@
 
 namespace App\Containers\Vendor\ResponseLog\Data\Repositories;
 
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLog;
 use App\Ship\Parents\Repositories\Repository;
 
 final class ResponseLogRepository extends Repository
 {
+    public function model(): string
+    {
+        return ResponseLog::class;
+    }
 }

@@ -11,16 +11,16 @@
  * @copyright  Copyright (C) kalistratov.ru, All rights reserved.
  * @link       https://kalistratov.ru
  *
- * @apiGroup           VendorResponseLog
- * @apiName            findResponseLogById
+ * @apiGroup VendorResponseLog
+ * @apiName findResponseLogById
  *
- * @api                {GET} /v1/response-logs/:id Получить по ID
- * @apiDescription     Получить лог по id
+ * @api {get} /v1/response-logs/:id Получить по ID
+ * @apiDescription Получить лог по id
  *
- * @apiVersion         1.0.0
- * @apiPermission      Аутентифицированный пользователь
+ * @apiVersion 1.0.0
+ * @apiPermission Аутентифицированный пользователь
  *
- * @apiSuccessExample  {json}  Успешный ответ:
+ * @apiSuccessExample {json} Успешный ответ:
  * HTTP/1.1 200 OK
 {
     "data": {
@@ -55,9 +55,9 @@
  */
 
 use App\Containers\Vendor\ResponseLog\Facades\Container;
-use App\Containers\Vendor\ResponseLog\UI\API\Controllers\Controller;
+use App\Containers\Vendor\ResponseLog\UI\API\Controllers\FindResponseLogByIdController;
 use Illuminate\Support\Facades\Route;
 
-Route::get(Container::getApiUri('{' . ID . '}'), [Controller::class, 'findResponseLogById'])
+Route::get(Container::getApiUri('{' . ID . '}'), FindResponseLogByIdController::class)
     ->name('api_vendor_response_logs_find_response_log_by_id')
     ->middleware(['auth:api']);

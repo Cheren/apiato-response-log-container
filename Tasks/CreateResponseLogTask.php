@@ -29,7 +29,7 @@ class CreateResponseLogTask extends ResponseLogTask
     public function run(CreateResponseLogDto $dto): ResponseLog
     {
         try {
-            return $this->repository->create($dto->toArray());
+            return $this->repository->create($dto->toData());
         } catch (Exception $exception) {
             throw new CreateResourceFailedException($exception->getMessage());
         }

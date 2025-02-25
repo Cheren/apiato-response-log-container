@@ -12,27 +12,26 @@
  * @link       https://kalistratov.ru
  */
 
-// @codingStandardsIgnoreStart
-
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
-use App\Ship\Database\Migrations\CreateTableMigration;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
 use App\Ship\Database\Migrations\CreateSchemaTable;
-class CreateResponseLogsTable extends CreateTableMigration
+use App\Ship\Database\Migrations\CreateTableMigration;
+use Illuminate\Database\Schema\Blueprint;
+
+return new class extends CreateTableMigration
 {
     public function addTableColumns(Blueprint $table): CreateSchemaTable
     {
         $table->id();
-        $table->ipAddress('ip_address');
-        $table->unsignedInteger('code');
-        $table->string('exception');
-        $table->text('message');
-        $table->longText('errors');
-        $table->string('file')->nullable();
-        $table->integer('line')->nullable();
-        $table->longText('trace');
-        $table->longText('request')->nullable();
+        $table->ipAddress();
+        $table->unsignedInteger(ResponseLog::CODE);
+        $table->string(ResponseLog::EXCEPTION);
+        $table->text(ResponseLog::MESSAGE);
+        $table->longText(ResponseLog::ERRORS);
+        $table->string(ResponseLog::FILE)->nullable();
+        $table->integer(ResponseLog::LINE)->nullable();
+        $table->longText(ResponseLog::TRACE);
+        $table->longText(ResponseLog::REQUEST)->nullable();
         $table->timestamps();
 
         return $this;
@@ -50,6 +49,6 @@ class CreateResponseLogsTable extends CreateTableMigration
 
     public function getTableName(): string
     {
-        return ResponseLog::TABLE;
+        return ResponseLogModel::TABLE;
     }
-}
+};

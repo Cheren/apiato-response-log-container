@@ -17,8 +17,8 @@ namespace App\Containers\Vendor\ResponseLog\Actions;
 use App\Containers\Vendor\ResponseLog\Dto\CreateResponseLogDto;
 use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
 use App\Containers\Vendor\ResponseLog\Tasks\CreateResponseLogTask;
-use App\Ship\Parents\Actions\Action;
 use App\Ship\Exceptions\CreateResourceFailedException;
+use App\Ship\Parents\Actions\Action;
 
 class CreateResponseLogAction extends Action
 {

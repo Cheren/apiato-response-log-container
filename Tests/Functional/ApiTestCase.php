@@ -12,8 +12,10 @@
  * @link       https://kalistratov.ru
  */
 
-namespace App\Containers\Vendor\ResponseLog\Tests;
+namespace App\Containers\Vendor\ResponseLog\Tests\Functional;
 
-abstract class ApiTestCase extends TestCase
+use App\Containers\Vendor\ResponseLog\Tests\UnitTestCase;
+
+abstract class ApiTestCase extends UnitTestCase
 {
 }

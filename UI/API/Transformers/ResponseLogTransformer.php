@@ -14,36 +14,28 @@
 
 namespace App\Containers\Vendor\ResponseLog\UI\API\Transformers;
 
-use App\Containers\Vendor\ResponseLog\Models\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
+use App\Containers\Vendor\ResponseLog\Models\ResponseLog as ResponseLogModel;
 use App\Ship\Parents\Transformers\Transformer;
 
-final class ResponseLogTransformer extends Transformer
+class ResponseLogTransformer extends Transformer
 {
-    public function transform(ResponseLog $responseLog): array
-    {
-        $response = [
-            'object' => $responseLog->getResourceKey(),
-            'id' => $responseLog->getHashedKey(),
-            'ip_address' => $responseLog->ip_address,
-            'code' => $responseLog->code,
-            'exception' => $responseLog->exception,
-            'message' => $responseLog->message,
-            'errors' => $responseLog->errors,
-            'file' => $responseLog->file,
-            'line' => $responseLog->line,
-            'trace' => $responseLog->trace,
-            'request' => $responseLog->request,
-            'created_at' => $this->nullOrTimestamp($responseLog->created_at),
-            'updated_at' => $this->nullOrTimestamp($responseLog->updated_at)
-        ];
-
-        return $this->ifAdmin($this->transformIfAdmin($responseLog), $response);
-    }
-
-    protected function transformIfAdmin(ResponseLog $responseLog): array
+    public function transform(ResponseLogModel $responseLog): array
     {
         return [
-            'real_id' => $responseLog->id
+            OBJECT => $responseLog->getResourceKey(),
+            ID => $responseLog->getHashedKey(),
+            ResponseLog::IP_ADDRESS => $responseLog->ip_address,
+            ResponseLog::CODE => $responseLog->code,
+            ResponseLog::EXCEPTION => $responseLog->exception,
+            ResponseLog::MESSAGE => $responseLog->message,
+            ResponseLog::ERRORS => $responseLog->errors,
+            ResponseLog::FILE => $responseLog->file,
+            ResponseLog::LINE => $responseLog->line,
+            ResponseLog::TRACE => $responseLog->trace,
+            ResponseLog::REQUEST => $responseLog->request,
+            CREATED_AT => $this->nullOrTimestamp($responseLog->created_at),
+            UPDATED_AT => $this->nullOrTimestamp($responseLog->updated_at)
         ];
     }
 }
