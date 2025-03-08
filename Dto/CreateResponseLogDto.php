@@ -54,11 +54,6 @@ class CreateResponseLogDto extends Dto implements ToData
         $exception = $args[ZERO][ResponseLog::EXCEPTION];
 
         $args[ZERO][ResponseLog::CODE] = (int)$exception->getCode();
-
-        if ($args[ZERO][ResponseLog::CODE] === ZERO && property_exists($exception, 'status')) {
-            $args[ZERO][ResponseLog::CODE] = $exception->status;
-        }
-
         $args[ZERO][ResponseLog::EXCEPTION] = $exception::class;
         $args[ZERO][ResponseLog::MESSAGE] = $exception->getMessage();
 
