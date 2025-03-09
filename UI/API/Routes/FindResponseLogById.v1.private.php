@@ -20,6 +20,8 @@
  * @apiVersion 1.0.0
  * @apiPermission Аутентифицированный пользователь
  *
+ * @apiParam {String} id Уникальный идентификатор
+ *
  * @apiSuccessExample {json} Успешный ответ:
  * HTTP/1.1 200 OK
 {
