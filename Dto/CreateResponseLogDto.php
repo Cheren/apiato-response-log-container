@@ -16,6 +16,7 @@ namespace App\Containers\Vendor\ResponseLog\Dto;
 
 use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog;
 use App\Ship\Contracts\ToData;
+use App\Ship\Exceptions\ValidationException;
 use App\Ship\Parents\Dto\Dto;
 use App\Ship\Traits\DtoToData;
 use Illuminate\Http\Request;
@@ -53,7 +54,12 @@ class CreateResponseLogDto extends Dto implements ToData
         /** @var Throwable $exception */
         $exception = $args[ZERO][ResponseLog::EXCEPTION];
 
-        $args[ZERO][ResponseLog::CODE] = (int)$exception->getCode();
+        $code = (int)$exception->getCode();
+        if ($exception instanceof ValidationException) {
+            $code = $exception->status;
+        }
+
+        $args[ZERO][ResponseLog::CODE] = $code;
         $args[ZERO][ResponseLog::EXCEPTION] = $exception::class;
         $args[ZERO][ResponseLog::MESSAGE] = $exception->getMessage();
 
@@ -84,7 +90,7 @@ class CreateResponseLogDto extends Dto implements ToData
             'cookies' => $request->cookies->all(),
             'headers' => $request->headers->all(),
             'content' => $request->getContent(),
-            'baseUrl' => $request->getBaseUrl(),
+            'uri' => $request->getRequestUri(),
         ];
     }
 
