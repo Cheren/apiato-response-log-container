@@ -19,6 +19,7 @@ use App\Containers\Vendor\ResponseLog\Data\Factories\ResponseLogFactory;
 use App\Containers\Vendor\ResponseLog\Foundation\ResponseLog as BaseResponseLog;
 use App\Ship\Database\Casts\JSON as JsonCast;
 use App\Ship\Parents\Models\Model;
+use App\Ship\Traits\Model\IsNumbered;
 use Illuminate\Support\Carbon;
 use JBZoo\Data\JSON;
 
@@ -40,6 +41,8 @@ use JBZoo\Data\JSON;
  */
 final class ResponseLog extends Model implements HasResourceKey
 {
+    use IsNumbered;
+
     public const TABLE = 'response_logs';
     public const RESOURCE_KEY = 'ResponseLog';
 

@@ -25,6 +25,7 @@ class ResponseLogTransformer extends Transformer
         return [
             OBJECT => $responseLog->getResourceKey(),
             ID => $responseLog->getHashedKey(),
+            NUMBER => $responseLog->getNumber(),
             ResponseLog::IP_ADDRESS => $responseLog->ip_address,
             ResponseLog::CODE => $responseLog->code,
             ResponseLog::EXCEPTION => $responseLog->exception,
